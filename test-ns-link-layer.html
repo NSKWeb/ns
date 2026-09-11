@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NS Link — Control Layer Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ns-link-wp/assets/css/ns-link.css">
+<style>
+body{background:#efe7d6;font-family:'Space Grotesk',sans-serif;padding:40px 16px}
+/* fake wp post the article belongs to's */
+.fake-post{max-width:860px;margin:0 auto 0;background:#fffdf6;border:1px solid #ddd;padding:28px 30px;font-family:'Fraunces',serif}
+.fake-post h2{font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:10px}
+.fake-post p{font-family:'Space Grotesk',sans-serif;font-size:.92rem;line-height:1.65;color:#444;margin-bottom:12px}
+.switch{max-width:860px;margin:0 auto 16px;display:flex;gap:10px;flex-wrap:wrap}
+.switch button{font-family:IBM Plex Mono,monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;border:2px solid #1c1a17;background:#fff8;padding:9px 14px;cursor:pointer}
+.switch button:hover{background:#1c1a17;color:#f7f1e5}
+.switch button.active{background:#1c1a17;color:#f7f1e5}
+</style>
+</head>
+<body>
+
+<div class="switch">
+  <button class="active" data-tab="p1">P1 — mid page</button>
+  <button data-tab="p4">P4 — final page</button>
+</div>
+
+<!-- fake WP article content (the WordPress post) -->
+<div class="fake-post" id="fakePost">
+  <h2>Tumhara WordPress Article</h2>
+  <p>Yeh woh article hai jo aapne WordPress me likha — jaise "Top 5 Free Fire ID Upgrade Secrets". Yehi control layer iske NEECHE (ya beech me) inject hoti hai jab visitor chain se aaye.</p>
+  <p>Plugin sirf control layer + ad-slot containers deta hai — article content aur ad codes aapke hain.</p>
+</div>
+
+<!-- NS Link control layer (plugin ka sasssli output) -->
+<div id="nslink-layer" class="nslink-layer nslink-mode-custom" data-wait="8" data-final="0" style="margin-top:24px">
+  <div class="nslink-mast">
+    <span class="nslink-brand">NS LINK <em>NEWS</em></span>
+    <span class="nslink-edition">EDITION 01 /  04</span>
+  </div>
+  <div class="nslink-adrow">
+    <div class="nslink-ad nslink-ad-top nslink-ad-1"></div>
+    <div class="nslink-ad nslink-ad-top nslink-ad-2"></div>
+  </div>
+  <div class="nslink-body">
+    <div class="nslink-ad nslink-ad-mid nslink-ad-mid-up"></div>
+    <div class="nslink-timer" role="timer" aria-live="polite">
+      <svg class="nslink-ring" width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="nslink-ring-bg" cx="60" cy="60" r="54"></circle>
+        <circle class="nslink-ring-fg" cx="60" cy="60" r="54"></circle>
+      </svg>
+      <div class="nslink-num">8</div>
+      <div class="nslink-unit">seconds</div>
+    </div>
+    <div class="nslink-ad nslink-ad-mid nslink-ad-mid-down"></div>
+  </div>
+  <div class="nslink-finish" aria-hidden="true">
+    <span class="nslink-finish-arrow"></span>
+    <span class="nslink-finish-text"></span>
+  </div>
+  <div class="nslink-progress"><span></span></div>
+</div>
+
+<div id="nslink-sticky" class="nslink-sticky">
+  <div class="nslink-ad nslink-ad-foot"></div>
+  <button type="button" class="nslink-btn" disabled>Continue →</button>
+</div>
+
+<script>
+window.NSLINK = {
+  step:1, total:4, wait:8, final:false,
+  finishText:'Scroll Down to Continue', finishHint:'the next edition awaits',
+  buttonLabel:'Continue →', buttonTarget:'https://site.com/task-2/?step=2&total=4&wait=8',
+  autoScroll:false, skip:false,
+  showAds:true, adTop:true, adMid:true, adFoot:true,
+  stickyBar:true, progressRule:true, themeMode:'custom'
+};
+</script>
+<script src="ns-link-wp/assets/js/ns-link.js"></script>
+<script>
+// tab switcher — dono variants test karne ke liye
+document.querySelectorAll('.switch button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.switch button').forEach(function(x){x.classList.remove('active')});
+    b.classList.add('active');
+    var layer = document.getElementById('nslink-layer');
+    if(b.dataset.tab==='p4'){
+      layer.dataset.wait = '10'; layer.dataset.final = '1';
+      layer.classList.add('nslink-final');
+      document.querySelector('.nslink-edition').textContent = 'EDITION 04 / 04';
+      document.querySelector('.nslink-timer .nslink-num').textContent = '10';
+      window.NSLINK.wait = 10; window.NSLINK.final = true;
+      window.NSLINK.finishText = 'Continue to Link';
+      window.NSLINK.buttonLabel = '🎁 Open Your Link →';
+      window.NSLINK.buttonTarget = 'https://destination-link.com/offer';
+      // restart timer
+      document.querySelector('.nslink-finish').classList.remove('show');
+      location.reload?; // naya load nahi — simple restart
+      // Actually manually restart JS
+      window.location.reload();
+    } else {
+      layer.dataset.wait = '8'; layer.dataset.final = '0';
+      layer.classList.remove('nslink-final');
+      document.querySelector('.nslink-edition').textContent = 'EDITION 01 / 04';
+      document.querySelector('.nslink-timer .nslink-num').textContent = '8';
+      window.NSLINK.wait = 8; window.NSLINK.final = false;
+      window.NSLINK.finishText = 'Scroll Down to Continue';
+      window.NSLINK.buttonLabel = 'Continue →';
+      window.NSLINK.buttonTarget = 'https://site.com/task-2/?step=2&total=4&wait=8';
+      document.querySelector('.nslink-finish').classList.remove('show');
+      window.location.reload();
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+/**
+ * NS Link — Control Layer CSS
+ * Literary Neo-Brutalism / Editorial design tokens.
+ * Scope: sirf control layer ko style karta hai. Article + ads aapke hain.
+ */
+
+:root{
+  --nslink-paper:#F7F1E5;
+  --nslink-paper2:#FFFBF2;
+  --nslink-ink:#1C1A17;
+  --nslink-ink-soft:rgba(28,26,23,.62);
+  --nslink-vermilion:#E4572E;
+  --nslink-ochre:#C98A00;
+  --nslink-line:2px solid #1C1A17;
+  --nslink-line-soft:1px solid rgba(28,26,23,.3);
+  --nslink-shadow:4px 4px 0 rgba(28,26,23,.14);
+  --nslink-display:'Fraunces',serif;
+  --nslink-body:'Space Grotesk',sans-serif;
+  --nslink-mono:'IBM Plex Mono',monospace;
+}
+
+/* Auto theme mode — WP theme ke colors le lo.. */
+.nslink-mode-auto{
+  --nslink-paper:#fff;
+  --nslink-paper2:#fdfdfd;
+  --nslink-ink:#111;
+  --nslink-ink-soft:rgba(17,17,17,.65);
+  --nslink-vermilion:#d6362c;
+  --nslink-ochre:#b08a00;
+  --nslink-line:2px solid #111;
+  --nslink-line-soft:1px solid rgba(17,17,17,.3);
+}
+
+/* Paper grain overlay — pointer-events none. */
+.nslink-layer::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Layer wrapper — the control layer pushes the page. */
+.nslink-layer{
+  position:relative;z-index:999;display:block;width:100%;max-width:860px;margin:18px auto 28px;
+  background:var(--nslink-paper2);color:var(--nslink-ink);
+  border:var(--nslink-line);box-shadow:var(--nslink-shadow);
+  font-family:var(--nslink-body);
+}
+.nslink-layer *{box-sizing:border-box}
+
+/* Masthead */
+.nslink-mast{
+  border-bottom:3px double var(--nslink-ink);padding:11px 16px 8px;display:flex;
+  justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;
+  background:var(--nslink-paper);
+}
+.nslink-brand{
+  font-family:var(--nslink-display);font-weight:900;font-size:clamp(1.05rem,2.4vw,1.5rem);
+  letter-spacing:-.02em;line-height:1;white-space:nowrap;
+}
+.nslink-brand em{font-style:italic;color:var(--nslink-vermilion);font-weight:700}
+.nslink-edition{
+  font-family:var(--nslink-mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--nslink-ink-soft);white-space:nowrap;
+}
+.nslink-edition::before{content:"◆ ";color:var(--nslink-ochre)}
+
+/* Header ad slots — empty containers. Koi ad code nahi yahan. */
+.nslink-adrow{display:flex;gap:12px;padding:13px 16px;border-bottom:var(--nslink-line-soft)}
+.nslink-ad{
+  border:2px dashed rgba(28,26,23,.5);background:rgba(255,251,242,.65);
+  color:var(--nslink-ink-soft);display:flex;align-items:center;justify-content:center;
+  font-family:var(--nslink-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+  min-height:74px;position:relative;
+}
+.nslink-ad::after{
+  content:"AD SLOT — yahan aapka ad code ayega";opacity:.85;padding:2px 8px;
+  border:1px solid var(--nslink-ink);background:var(--nslink-paper);color:var(--nslink-ink);
+}
+.nslink-ad-top{flex:1;min-height:74px}
+.nslink-ad-mid{min-height:110px;max-width:640px;margin:14px auto;width:92%}
+.nslink-ad-mid-up{margin-bottom:2px}
+.nslink-ad-foot{min-height:64px;width:100%}
+
+/* Body stack */
+.nslink-body{padding:8px 0 14px;display:flex;flex-direction:column;gap:8px}
+
+/* Timer */
+.nslink-timer{
+  margin:14px auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;
+  max-width:460px;width:92%;border:3px double var(--nslink-ink);
+  background:linear-gradient(180deg,var(--nslink-paper),var(--nslink-paper2));
+  box-shadow:var(--nslink-shadow);padding:14px 18px;
+}
+.nslink-ring{width:120px;height:120px;transform:rotate(-90deg);display:block;flex-shrink:0}
+.nslink-ring-bg{fill:none;stroke:rgba(28,26,23,.14);stroke-width:8}
+.nslink-ring-fg{
+  fill:none;stroke:var(--nslink-ochre);stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:339.29;stroke-dashoffset:0;
+  filter:drop-shadow(0 0 3px rgba(201,138,0,.5));
+  transition:stroke-dashoffset 1s linear,stroke .4s;
+}
+.nslink-final .nslink-ring-fg{stroke:var(--nslink-vermilion);filter:drop-shadow(0 0 3px rgba(228,87,46,.5))}
+
+
+.nslink-num{
+  position:absolute;font-family:var(--nslink-mono);font-weight:600;font-size:2rem;color:var(--nslink-ink);
+}
+.nslink-timer{position:relative}
+.nslink-unit{
+  position:absolute;bottom:18px;font-family:var(--nslink-mono);font-size:.5rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--nslink-ink-soft);
+}
+.nslink-num,.nslink-unit{left:50%;transform:translateX(-50%)}
+.nslink-num{top:37%}
+.nslink-unit{bottom:22%}
+
+/* Finish line — initially hidden.. timer khtm par JS show karega., */
+.nslink-finish{
+  display:none;text-align:center;font-family:var(--nslink-mono);text-transform:uppercase;
+  letter-spacing:.12em;font-size:.72rem;padding:12px 14px;border-top:var(--nslink-line-soft);
+  border-bottom:var(--nsllink-line-soft);background:var(--nslink-paper);color:var(--nslink-ink);
+}
+.nslink-finish.show{display:block;animation:nslink-pop .4s cubic-bezier(.2,1.4,.4,1)}
+.nslink-finish-arrow{display:block;font-size:1rem;color:var(--nslink-vermilion);margin-bottom:3px}
+.nslink-final .nslink-finish-arrow{color:var(--nslink-ochre)}
+@keyframes nslink-pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* Progress rule — timer ke saath bharti hai. JS width set karega., */
+.nslink-progress{height:3px;background:rgba(28,26,23,.15);overflow:hidden;}
+.nslink-progress span{display:block;height:100%;width:0%;background:var(--nslink-ochre);transition:width 1s linear}
+.nslink-final .nslink-progress span{background:var(--nslink-vermilion)}
+
+/* Sticky bar — mobile friendly continue.. */
+.nslink-sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:10000;
+  background:var(--nslink-paper2);border-top:var(--nslink-line);
+  box-shadow:0 -4px 0 rgba(28,,,.12) 4px;padding:10px 14px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;
+}
+.nslink-sticky .nslink-ad-foot{flex:1 120px;min-height:56px;margin:0}
+.nslink-btn{
+  font-family:var(--nslink-mono);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  border:2px solid var(--nslink-ink);background:var(--nslink-ink);color:var(--nslink-paper);
+  padding:12px 22px;cursor:pointer;transition:.15s;white-space:nowrap;
+  box-shadow:3px 3px 0 rgba(28,26,23,.18);
+}
+.nslink-btn:disabled{background:rgba(28,26,23,.45);border-color:rgba(28,26,23,.45);cursor:not-allowed;color:rgba(255,251,242,.85))}
+.nslink-btn:not(:disabled):hover{background:var(--nslink-vermilion);border-color:var(--nslink-vermilion)}
+.nslink-final .nslink-btn{background:var(--nslink-ochre);color:var(--nslink-ink)}
+.nslink-final .nslink-btn:not(:disabled):hover{background:var(--nslink-vermilion);color:var(--nslink-paper)}
+
+/* Skip (dev) — timer 0.5s fast. JS handles it; CSS sirf visual cue.. */
+.nslink-skip .nslink-ring-fg{transition:stroke-dashoffset .5s linear}
+
+/* Mobile */
+@media(max-width:600px){
+  .nslink-mast{padding:9px 12px 7px}
+  .nslink-adrow{gap:8px;padding:10px 12px}
+  .nslink-ad::after{font-size:.5rem}
+  .nslink-ring{width:96px;height:96px}
+  .nslink-timer{width:98%;padding:12px 10px}
+}
