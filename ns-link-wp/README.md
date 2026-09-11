@@ -95,4 +95,14 @@ Plugin **sirf empty containers** deta hai:
 
 ## License
 
-GPL-2.0-or-later — free, hamesha..
+**NS Link plugin** — [GPL-2.0-or-later](../LICENSE).
+
+| | |
+|---|---|
+| **License** | GNU General Public License v2.0 or later (GPL-2.0-or-later) |
+| **Copyright** | © 2026 NSKWeb |
+| **Kya kar sakte ho** | Free me use, copy, modify, distribute karo (commercial bhi) |
+| **Condition** | Source code + license notice apne users ko dena (jab distribute karo) |
+| **Warranty** | Koi nahi — software "AS IS", as per GPL Sections 11–12 |
+
+**Note:** Plugin ke saath distribute karte waqt [`LICENSE`](../LICENSE) file copy rakhna best practice hai — WordPress repo guidelines bhi yehi kehte hain..

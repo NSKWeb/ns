@@ -176,11 +176,11 @@ Free hosting( Netlify Drop / Vercel / GitHub Pages): repo ka root folder drag-dr
 
 
 
-### Step Step  6 - Part  2 (shortener app) jab ayega,, deploy
+### Step Step  6 - Part  2 (URL shortener web app) jab ayega,, deploy
 
-Alag-domain shortener app( PHP) jab isi repo me aayega - deploy rasta( InfinityFree/000webhost:
+Alag-domain **URL shortener web app / website** (PHP) jab isi repo me aayega - deploy rasta (InfinityFree/000webhost:
 ```bash
-1.. shortener app folder ko hosting ke `htdocs/` me upload karo
+1.. shortener web app folder ko hosting ke `htdocs/` me upload karo
 2.. Domain point karo( short.site)) -> `site.com/go/<short-code>` se flow chain chalega.
 
 3.. Admin panel `your-host/admin.php` se 4 URLs + timer + destination set karo
@@ -208,11 +208,43 @@ git push origin main
 
 ## Next steps
 
-- **Part  2** - alag-domain URL shortener app( chain generator + admin panel) - **isi repo me** folder `shortener/` me aayega..
+- **Part  2** - alag-domain **URL shortener web app / website** (chain generator + admin panel) - **isi repo me** folder `shortener/` me aayega..
 - **Part  3** - GitHub Actions se free hosting deploy optional..
 
 ---
 
 ## License
 
-GPL-2.0-or-later - free,, hamesha..
+**NS Link** — [GPL-2.0-or-later](LICENSE) hai. 📜
+
+| | |
+|---|---|
+| **License** | GNU General Public License **v2.0 or later** (GPL-2.0-or-later) |
+| **File** | [`LICENSE`](LICENSE) — official GNU text (gnu.org se canonical copy) |
+| **Kya kar sakte ho** | ✓ Free me use, copy, modify, distribute, sell karo ✓ |
+| **Kya nahi kar sakte** | ✗ Adhikar mat chhino (unka GPL hona zaroori) ✗ |
+| **Agar distribute karo** | Source code available rakhna hoga + GPL license + copyright notice retain karna hoga |
+| **Works — repo ke sab parts par** | Plugin (`ns-link-wp/`), web app folder (jab aayega), design assets (`assets/`), previews, docs — sab isi license ke under hain |
+| **No warranty** | Ye software "AS IS" hai — koi warranty nahi, koi liability nahi (Section 11, 12) |
+| **Compatibility** | GPL-v2-or-later free software ke saath compatible. GPL-v3 projects ke saath bhi (compatibility clause se) |
+
+**Sahi tarika — attribution + license notice:**
+
+Agar tum NS Link ko use karte ho ya distribute karte ho, to:
+
+1. **Copyright + license notice** rakho — source files me (headers `ns-link.php` me already hai: `License: GPL-2.0-or-later`).
+2. **LICENSE file** unke saath rakho — ya link karo is repo ke LICENSE par.
+3. **Source code offer karo** — agar tum modified/binary version distribute karte ho, to usi license (GPL) ke under **source code available** rakhna mandatory hai.
+4. **"AS IS"** — koi bhi claim mat karo ki guarantee hai; software free me milta hai, isliye iska koi warranty nahi.
+
+| Author | NSKWeb |
+|---|---|
+| Copyright | © 2026 NSKWeb |
+| License | [GPL-2.0-or-later](LICENSE) |
+
+---
+
+## Next steps
+
+- **Part  2** - alag-domain **URL shortener web app / website** (chain generator + admin panel) - **isi repo me** folder `shortener/` me aayega..
+- **Part  3** - GitHub Actions se free hosting deploy optional..
