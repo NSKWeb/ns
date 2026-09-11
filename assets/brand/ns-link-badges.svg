@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380">
+  <defs>
+    <style>
+      .mono { font-family: 'Courier New', monospace; }
+      .serif { font-family: Georgia, serif; }
+      .ink { fill: #1C1A17; }
+      .paper { fill: #F7F1E5; }
+      .soft { fill: rgba(28,26,23,.62); }
+      .ochre { fill: #C98A00; }
+    </style>
+  </defs>
+  <rect width="1200" height="380" fill="#F7F1E5"/>
+  <text x="50" y="52" class="serif ink" font-size="34" font-weight="900">Why NS Link — thee pages of proof</text>
+
+  <g transform="translate(50,88)">
+    <rect width="250" height="230" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="8" width="250" height="46" fill="#E4572E"/>
+    <text x="125" y="40" text-anchor="middle" class="mono paper" font-size="20">01 — FREE</text>
+    <text x="22" y="110" class="serif ink" font-size="26" font-weight="900">Zero plugin fee</text>
+    <text x="22" y="150" class="mono soft" font-size="14">WP Safelink Pro type paywall nahi. Har cheez GPL — free, hamesha.</text>
+  </g>
+
+  <g transform="translate(340,88)">
+    <rect width="250" height="230" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="8" width="250" height="46" fill="#1C1A17"/>
+    <text x="125" y="40" text-anchor="middle" class="mono paper" font-size="20">02 — AD-FUNDED</text>
+    <text x="22" y="110" class="serif ink" font-size="26" font-weight="900">You own the ads</text>
+    <text x="22" y="150" class="mono soft" font-size="14">AdSense ya koi third-party — plugin sirf slots deta hai, revenue aapka.</text>
+  </g>
+
+  <g transform="translate(630,88)">
+    <rect width="250" height="230" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="8" width="250" height="46" fill="#C98A00"/>
+    <text x="125" y="40" text-anchor="middle" class="mono paper" font-size="20">03 — CONTROL</text>
+    <text x="22" y="110" class="serif ink" font-size="26" font-weight="900">Your chain, your pacing</text>
+    <text x="22" y="150" class="mono soft" font-size="14">Har page ka wait alag. 3 pages lead + 4th final. Tum decide karte ho.</text>
+  </g>
+
+  <g transform="translate(920,88)">
+    <rect width="250" height="230" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="8" width="250" height="46" fill="#E4572E"/>
+    <text x="125" y="40" text-anchor="middle" class="mono paper" font-size="20">04 — CRAFT</text>
+    <text x="22" y="110" class="serif ink" font-size="26" font-weight="900">Editorial charm</text>
+    <text x="22" y="150" class="mono soft" font-size="14">Literary neo-brutalism — masthead, grain, rules. Visitors ko premium feel.</text>
+  </g>
+</svg>

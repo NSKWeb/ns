@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+  <defs>
+    <style>
+      .mono { font-family: 'Courier New', monospace; }
+      .serif { font-family: Georgia, serif; }
+      .ink { fill: #1C1A17; }
+    </style>
+  </defs>
+  <rect width="1200" height="360" fill="#F7F1E5"/>
+  <text x="50" y="52" class="serif ink" font-size="34" font-weight="900">House Palette — ink on paper, vermilion accents</text>
+
+  <rect x="50" y="90" width="256" height="190" fill="#F7F1E5" stroke="#1C1A17" stroke-width="3"/>
+  <rect x="50" y="90" width="256" height="70" fill="#F7F1E5" stroke="#1C1A17" stroke-width="3"/>
+  <text x="64" y="134" class="mono ink" font-size="19" font-weight="600">PAPER — FF F7F1E5</text>
+  <text x="64" y="176" class="mono ink" font-size="15">cream newsprint</text>
+  <text x="64" y="208" class="mono ink" font-size="15">main canvas</text>
+
+  <rect x="336" y="90" width="256" height="190" fill="#1C1A17" stroke="#1C1A17" stroke-width="3"/>
+  <text x="350" y="134" class="mono paper" font-size="19" font-weight="600">INK — 1C1A17</text>
+  <text x="350" y="176" class="mono" fill="#F7F1E5" font-size="15">near-black</text>
+  <text x="350" y="208" class="mono" fill="#F7F1E5" font-size="15">type + rules</text>
+
+  <rect x="622" y="90" width="256" height="190" fill="#E4572E" stroke="#1C1A17" stroke-width="3"/>
+  <text x="636" y="134" class="mono paper" font-size="19" font-weight="600">VERMILION — E4572E</text>
+  <text x="636" y="176" class="mono" fill="#F7F1E5" font-size="15">accent — timer</text>
+  <text x="636" y="208" class="mono" fill="#F7F1E5" font-size="15">button + arrows</text>
+
+  <rect x="908" y="90" width="256" height="190" fill="#C98A00" stroke="#1C1A17" stroke-width="3"/>
+  <text x="922" y="134" class="mono paper" font-size="19" font-weight="600">OCHRE — C98A00</text>
+  <text x="922" y="176" class="mono" fill="#F7F1E5" font-size="15">secondary accent</text>
+  <text x="922" y="208" class="mono" fill="#F7F1E5" font-size="15">rules + stamps</text>
+
+  <text x="50" y="314" class="serif ink" font-size="22" font-style="italic">Ink-marks: border 2px solid ink, offset shadow 4px 4px 0 rgba(28,26,23,.14), grain optional.</text>
+</svg>

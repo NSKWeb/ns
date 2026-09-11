@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <style>
+      .ink { fill: #1C1A17; }
+      .verm { fill: #E4572E; }
+      .ochre { fill: #C98A00; }
+      .paper { fill: #F7F1E5; }
+      .mono { font-family: 'Courier New', monospace; }
+      .serif { font-family: Georgia, serif; }
+      .soft { fill: rgba(28,26,23,.62); }
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#F7F1E5"/>
+  <text x="50" y="52" class="serif ink" font-size="36" font-weight="900">The Chain — one link, four readings</text>
+  <text x="50" y="84" class="mono soft" font-size="18" letter-spacing="5">SHORT LINK → TASK 1 → TASK  2 → TASK  3 → TASK  4 → DESTINATION</text>
+
+  <!-- Step boxes -->
+  <g class="step" transform="translate(50,130)">
+    <rect width="170" height="190" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="6" width="170" height="34" fill="#1C1A17"/>
+    <text x="85" y="30" text-anchor="middle" class="mono paper" font-size="17" letter-spacing="2">SHORT LINK</text>
+    <circle cx="85" cy="90" r="26" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="85" y="99" text-anchor="middle" class="mono ink" font-size="24">x7</text>
+    <text x="85" y="142" text-anchor="middle" class="serif ink" font-size="19">alag domain</text>
+    <text x="85" y="168" text-anchor="middle" class="mono soft" font-size="14">nslk.in/x7</text>
+  </g>
+  <g class="step" transform="translate(280,130)">
+    <rect width="170" height="190" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="6" width="170" height="34" fill="#1C1A17"/>
+    <text x="85" y="30" text-anchor="middle" class="mono paper" font-size="17" letter-spacing="2">TASK 1</text>
+    <rect x="24" y="56" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="72" text-anchor="middle" class="mono ink" font-size="12">728×90 ×2</text>
+    <circle cx="85" cy="106" r="20" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="85" y="113" text-anchor="middle" class="mono ink" font-size="17">8s</text>
+    <rect x="24" y="138" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="154" text-anchor="middle" class="mono ink" font-size="12">300×250</text>
+    <text x="85" y="182" text-anchor="middle" class="mono soft" font-size="12">2 ads + ad/timer/ad</text>
+  </g>
+  <g class="step" transform="translate(510,130)">
+    <rect width="170" height="190" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="6" width="170" height="34" fill="#1C1A17"/>
+    <text x="85" y="30" text-anchor="middle" class="mono paper" font-size="17" letter-spacing="2">TASK  2</text>
+    <rect x="24" y="56" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="72" text-anchor="middle" class="mono ink" font-size="12">728×90 ×2</text>
+    <circle cx="85" cy="106" r="20" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="85" y="113" text-anchor="middle" class="mono ink" font-size="17">8s</text>
+    <rect x="24" y="138" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="154" text-anchor="middle" class="mono ink" font-size="12">300×250</text>
+    <text x="85" y="182" text-anchor="middle" class="mono soft" font-size="12">same process</text>
+  </g>
+  <g class="step" transform="translate(740,130)">
+    <rect width="170" height="190" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect y="6" width="170" height="34" fill="#1C1A17"/>
+    <text x="85" y="30" text-anchor="middle" class="mono paper" font-size="17" letter-spacing="2">TASK  3</text>
+    <rect x="24" y="56" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="72" text-anchor="middle" class="mono ink" font-size="12">728×90 ×2</text>
+    <circle cx="85" cy="106" r="20" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="85" y="113" text-anchor="middle" class="mono ink" font-size="17">14s</text>
+    <rect x="24" y="138" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="154" text-anchor="middle" class="mono ink" font-size="12">300×250</text>
+    <text x="85" y="182" text-anchor="middle" class="mono soft" font-size="12">same process</text>
+  </g>
+  <g class="step" transform="translate(970,130)">
+    <rect width="170" height="190" rx="4" fill="#FFFBF2" stroke="#E4572E" stroke-width="4"/>
+    <rect y="6" width="170" height="34" fill="#E4572E"/>
+    <text x="85" y="30" text-anchor="middle" class="mono paper" font-size="17" letter-spacing="2">TASK  4</text>
+    <rect x="24" y="56" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="72" text-anchor="middle" class="mono ink" font-size="12">728×90 ×2</text>
+    <circle cx="85" cy="106" r="20" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="85" y="113" text-anchor="middle" class="mono ink" font-size="17">10s</text>
+    <rect x="24" y="138" width="122" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="85" y="154" text-anchor="middle" class="mono ink" font-size="12">300×250</text>
+    <text x="85" y="182" text-anchor="middle" class="mono soft" font-size="12">final — link</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#1C1A17" stroke-width="4" fill="none">
+    <path d="M220 225 L268 225"/>
+    <path d="M450 225 L498 225"/>
+    <path d="M680 225 L728 225"/>
+    <path d="M910 225 L958 225"/>
+  </g>
+  <g fill="#1C1A17">
+    <path d="M268 225 l-10 6 v-12 z"/>
+    <path d="M498 225 l-10 6 v-12 z"/>
+    <path d="M728 225 l-10 6 v-12 z"/>
+    <path d="M958 225 l-10 6 v-12 z"/>
+  </g>
+
+  <!-- Destination -->
+  <g transform="translate(360,360)">
+    <rect width="480" height="100" rx="6" fill="#1C1A17"/>
+    <text x="240" y="44" text-anchor="middle" class="serif paper" font-size="30" font-weight="900">🎁 DESTINATION OPENS</text>
+    <text x="240" y="76" text-anchor="middle" class="mono ochre" font-size="16" letter-spacing="3">YOUR ORIGINAL LINK — FREE AT LAST</text>
+  </g>
+  <path d="M595 320 L595 348" stroke="#E4572E" stroke-width="4"/>
+  <path d="M575 348 h40 l-8 10 v-6 l-8 6" fill="#E4572E"/>
+</svg>

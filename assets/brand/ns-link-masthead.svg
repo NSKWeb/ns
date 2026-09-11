@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <defs>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 0.06 0"/>
+    </filter>
+    <style>
+      .paper { fill: #F7F1E5; }
+      .ink { fill: #1C1A17; }
+      .verm { fill: #E4572E; }
+      .ochre { fill: #C98A00; }
+      .serif { font-family: Georgia, 'Times New Roman', serif; }
+      .mono { font-family: 'Courier New', monospace; }
+    </style>
+  </defs>
+  <rect class="paper" width="1200" height="300"/>
+  <rect width="1200" height="300" filter="url(#grain)" opacity="0.5"/>
+  <line x1="40" y1="26" x2="1160" y2="26" stroke="#1C1A17" stroke-width="4"/>
+  <line x1="40" y1="34" x2="1160" y2="34" stroke="#1C1A17" stroke-width="1.5"/>
+  <line x1="40" y1="266" x2="1160" y2="266" stroke="#1C1A17" stroke-width="1.5"/>
+  <line x1="40" y1="274" x2="1160" y2="274" stroke="#1C1A17" stroke-width="4"/>
+  <text x="60" y="84" class="serif ink" font-size="34" font-weight="700" letter-spacing="6">NS LINK — EST. 2026 — VOL.01, NO..3</text>
+  <text x="120" y="170" class="serif ink" font-size="86" font-weight="900">NS Link <tspan class="verm" font-style="italic">News</tspan></text>
+  <text x="600" y="170" text-anchor="middle" class="mono ink" font-size="20" letter-spacing="8">◆</text>
+  <text x="126" y="216" class="serif ochre" font-size="28" font-style="italic">WP Safelink ka free alternative — literary neo-brutalism edition</text>
+  <circle cx="1080" cy="128" r="64" fill="none" stroke="#E4572E" stroke-width="5" stroke-dasharray="14 8"/>
+  <circle cx="1080" cy="128" r="44" fill="none" stroke="#C98A00" stroke-width="3" stroke-dasharray="6 6"/>
+  <text x="1080" y="140" text-anchor="middle" class="mono ink" font-size="30" font-weight="600">9s</text>
+  <rect x="1014" y="196" width="132" height="34" fill="#1C1A17"/>
+  <text x="1080" y="220" text-anchor="middle" class="mono paper" font-size="17" letter-spacing="3">CONTINUE →</text>
+  <text x="60" y="258" class="mono ink" font-size="17" letter-spacing="4">SHORTENED, INKED, &amp; POSTED — AD-FUNDED PRESS RUN</text>
+  <text x="1140" y="258" text-anchor="end" class="mono ink" font-size="17" letter-spacing="4">P. 03</text>
+</svg>
