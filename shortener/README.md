@@ -72,7 +72,7 @@ The app inherits the repo's **literary neo-brutalism** house style:
 
 ### Requirements
 
-- PHP **7.4+** (tested on **8.x**) with `pdo`, `pdo_sqlite`, `session`, `fileinfo` *(optional)*
+- PHP **7.4+** (tested on **8.x**) with `pdo`, `pdo_sqlite`, `session`
 - Write access to `shortener/data/`
 - Apache (`mod_rewrite`, `.htaccess` included) **or** Nginx — or the PHP built-in server for local work
 
@@ -199,8 +199,266 @@ nslink_log_click($linkId, $chainId, $step);   // inside go.php / chain.php
 
 `admin/stats.php` groups `clicks` by chain and by step:
 
-- Per-chain totals + per-step totals (the `step` column, *not* a `step_num` — the original typo is fixed).
+- Per-chain totals + per-step totals (the `step` column).
 - No aggregate pipeline needed; it's a couple of `SELECT COUNT(*) … GROUP BY` queries, nicely table-ized in the same neo-brutalist style.
+
+---
+
+## 🛠️ Deployment — step by step (choose your host)
+
+Four ways to run the same `shortener/` folder. Pick the one that matches your hosting.
+
+| Route | Skills needed | Best for |
+|---|---|---|
+| **A. PHP built-in server** | Terminal only | Local testing, quick demo |
+| **B. Shared hosting (Apache / cPanel)** | File upload via FTP/File Manager | InfinityFree, 000webhost, Hostinger, … |
+| **C. Subdomain on cPanel** | cPanel → create subdomain | A live vanity domain (`go.yourdomain.com`) |
+| **D. VPS + Nginx** | Basic Linux + Nginx | Full control, high traffic |
+| **E. Local (XAMPP/WAMP/Laragon)** | Desktop installer | Offline editing on your own machine |
+
+> **One rule for every route:** the `data/` folder must be **writable by PHP**, and the web server must
+> route `/go/<code>` to `go.php`. Route A uses `router.php`; routes B–E use the included `.htaccess`
+> (Apache) or a short rewrite config (Nginx).
+
+### Option A — PHP built-in server (local, 60 seconds)
+
+```bash
+cd shortener
+php -S 127.0.0.1:8099 router.php
+```
+
+- Open <http://127.0.0.1:8099/> → landing page
+- Admin: <http://127.0.0.1:8099/admin/login.php>
+- **You must pass `router.php`** as the router argument — without it, `/go/<code>` won't resolve
+  (the built-in server would send `/go/*` to `index.php` instead of `go.php`).
+
+To expose it beyond localhost on a LAN:
+
+```bash
+php -S 0.0.0.0:8099 router.php
+# then visit http://YOUR_LAN_IP:8099/
+```
+
+### Option B — Shared hosting (Apache, e.g. InfinityFree / 000webhost / Hostinger)
+
+1. **Download the zip** of the repo (`Code ▾ → Download ZIP`) and extract.
+2. Put **only the `shortener/` folder** in your site root, e.g. `htdocs/` or `public_html/`:
+   ```
+   public_html/
+   └── shortener/
+       ├── index.php
+       ├── go.php
+       ├── router.php
+       ├── .htaccess
+       ├── config.php
+       └── ...
+   ```
+   *(Or upload the app's contents to the root `public_html/` directly if you want the app at the domain root.)*
+3. **Permissions:** make sure `shortener/data/` is writable by PHP (usually `755` for folders, `644`
+   for files; on cPanel set `data/` to `755` or `775`). On cPanel/FTP, `data/` may not exist yet — it's
+   created automatically on first run (PHP must be allowed to `mkdir`).
+4. The `.htaccess` file already contains the `/go/<code>` rewrite — check the host doesn't block
+   `.htaccess`. If you get a **500 on every page**, see **Troubleshooting** below.
+5. Visit `https://yourhost/shortener/admin/login.php` (or `/admin/login.php` if at root) and log in
+   with the defaults. **Change the password immediately.**
+
+> 💡 **Domain-root install:** if you want `https://yourdomain.com/go/abc` instead of
+> `https://yourdomain.com/shortener/go/abc`, upload the **contents** of `shortener/` into
+> `public_html/` (don't keep the wrapping `shortener/` folder). Everything else is identical.
+
+### Option C — cPanel subdomain (nice vanity link)
+
+1. cPanel → **Subdomains** → create `go.yourdomain.com`, document root
+   `public_html/shortener` (or wherever you uploaded the folder).
+2. Upload `shortener/` contents to that document root via **File Manager** or FTP.
+3. In cPanel → **PHP** or **MultiPHP**, select PHP **7.4+ / 8.x** and confirm the extensions:
+   `pdo`, `pdo_sqlite`, `session`.
+4. Set `data/` writable (Option B step 3).
+5. Open `https://go.yourdomain.com/admin/login.php` → login → change password.
+6. Optional: set `base_url` in `config.php` to `https://go.yourdomain.com` if you want fully-qualified
+   admin links (the app auto-detects the host, so this is usually unnecessary).
+
+### Option D — VPS with Nginx
+
+Nginx doesn't understand `.htaccess`, so add a rewrite to your server block:
+
+```nginx
+server {
+    listen 80;
+    server_name go.example.com;
+    root /var/www/shortener;
+    index index.php;
+
+    location / {
+        try_files $uri $uri/ @shortener;
+    }
+
+    # /go/<code>  ->  go.php?code=<code>
+    location ~ ^/go/([A-Za-z0-9]+)/?$ {
+        rewrite ^/go/([A-Za-z0-9]+)/?$ /go.php?code=$1 last;
+    }
+
+    location @shortener {
+        rewrite ^ /index.php last;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+    }
+}
+```
+
+Then reload Nginx and fix ownership of the data dir:
+
+```bash
+sudo systemctl reload nginx
+sudo chown -R www-data:www-data /var/www/shortener/data
+```
+
+### Option E — Local desktop (XAMPP / WAMP / Laragon)
+
+1. Install XAMPP → place the `shortener/` folder in `htdocs/`.
+2. Start Apache. Visit `http://localhost/shortener/admin/login.php`.
+3. Same checklist: change the password, create a test link.
+
+---
+
+## ✅ First-run setup (all routes)
+
+When the first PHP request hits the app, `db.php`:
+
+1. Creates `shortener/data/` if missing.
+2. Opens `shortener/data/ns-link.sqlite` (SQLite, WAL mode).
+3. Applies `schema.sql` (idempotent `CREATE TABLE IF NOT EXISTS`) — creates `links`, `chains`,
+   `clicks`, `settings`, and seeds default settings.
+
+So there is **no `php migrate` step** — the first page visit boots the DB for you.
+
+**First-run checklist** (do every item once):
+
+- [ ] Log into `/admin/login.php` with the defaults (`admin` / `ns-admin-2026`)
+- [ ] **Change the admin password** (Settings → Change Password, at least 8 chars)
+- [ ] Set `cookie_secure = true` in `config.php` if the site is HTTPS (recommended)
+- [ ] Optional: set `allowed_hosts` to a whitelist like `['go.example.com']`
+- [ ] Create a **test simple link** → open `/go/<code>` → confirm the 302
+- [ ] Create a **test chain** → open `/go/<chain-code>` → walk all steps → confirm the final
+      "Open Your Link" goes to the destination
+- [ ] Watch the click counter appear in **Stats** after a few visits
+
+---
+
+## 🕹️ How to operate — 1-by-1
+
+The admin panel is the whole control room. Every screen:
+
+| Screen | URL | What it does |
+|---|---|---|
+| **Dashboard** | `admin/index.php` | Create simple link, create chain, recent links & chains, quick delete |
+| **Chains** | `admin/chains.php` | List all chains with **short link** + **chain link** preview, delete (cascades step links) |
+| **Links** | `admin/links.php` | All short links, copy codes, delete |
+| **Stats** | `admin/stats.php` | Per-chain & per-step click counts + last-click time |
+| **Settings** | `admin/settings.php` | Change the admin password (writes `config.php` via `var_export`) |
+| **Logout** | `admin/logout.php` | End the session |
+
+### Step-by-step: create a simple link
+
+1. Log in → **Dashboard**.
+2. *(Optional)* type a **Label** (e.g. `Offer page`).
+3. Paste the destination URL into **Destination URL** (e.g. `https://example.com/offer`).
+4. Click **Create short link**.
+5. The success banner shows the new code, e.g. `/go/aB3xY9`.
+6. Share `https://yourdomain/go/aB3xY9` — anyone who visits is logged + 302-redirected.
+
+### Step-by-step: create a chain
+
+1. Log in → **Dashboard** → **Create Chain**.
+2. Give the chain a **name** (optional, e.g. `Autumn campaign`).
+3. Set the **Final destination URL** — the page the last step sends people to.
+4. Fill the **Step rows**: each row is one URL the visitor must sit through, with a **wait** time
+   (seconds) before the Continue button unlocks. Four rows are shown by default.
+   - `Step URL` — the task page you want them to read (article, landing, ad page…).
+   - `Wait` — how many seconds the countdown goes before Continue enables (`1–120`).
+5. Click **+ Add step** to add a fifth (or more) step, if needed.
+6. Click **Create chain**.
+7. Go to **Chains** to see the new entry with two ready-made links:
+   - **Short link** — `/go/<first-step-code>` (drops you straight on step 1)
+   - **Chain link** — `/go/<chain-code>` (the canonical code; 302s to step 1's short link)
+8. Test it: open the **chain link** in an incognito window, scroll, wait for the timer, Continue
+   through every step, land on the destination. Then check **Stats**.
+
+### Step-by-step: read the stats
+
+- **Total clicks** is shown at the top of the Stats page.
+- The table groups by **chain**, then shows **step link**, **step #**, **clicks**, **last click**.
+- A click is recorded when `/go/<code>` resolves *or* when a task page renders — a chain of 4 steps
+  typically adds 4–5 clicks per full visitor (chain code 302 + each step render).
+- The table shows the latest 100 rows by last-click time.
+
+### Step-by-step: maintain (update / delete)
+
+- **Delete a link:** Dashboard → Recent Links → Delete → confirm. (Also the Links page.)
+- **Delete a chain:** Dashboard → Recent Chains → Delete, or **Chains** page → Delete. This
+  **cascades** — it also deletes each step's short link, so stats for those step links are removed too.
+- **Change password:** Settings → current + new + confirm → **Update password**. The new bcrypt hash
+  is written straight back into `config.php` (`admin_pass_hash`), which now overrides `admin_pass`.
+
+### Backup & restore the database
+
+The whole state lives in one SQLite file (`shortener/data/ns-link.sqlite`). To back it up:
+
+```bash
+# Safe online backup (SQLite VACUUM INTO, WAL-aware)
+cd shortener
+php -r '$db = new PDO("sqlite:data/ns-link.sqlite"); $db->exec("VACUUM INTO \047backup-$(date +%F).sqlite\047");'
+# or simply copy while the site is idle:
+cp data/ns-link.sqlite ~/ns-link-backup-$(date +%F).sqlite
+```
+
+To restore: overwrite the file, then fix the permission:
+
+```bash
+cp ~/ns-link-backup-YYYY-MM-DD.sqlite shortener/data/ns-link.sqlite
+chown www-data:www-data shortener/data/ns-link.sqlite   # match your web user
+```
+
+To **reset to a clean slate** (fresh demo, no clicks): stop the site, delete the DB:
+
+```bash
+rm -f shortener/data/ns-link.sqlite shortener/data/ns-link.sqlite-*
+# next page load recreates schema + defaults
+```
+
+---
+
+## 🧯 Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| **500 on every page** | `.htaccess` blocked / `RewriteEngine` not allowed (or wrong PHP version) | Confirm `.htaccess` present; on strict hosts upload to root and test `index.php`; ensure PHP 7.4+ |
+| **`/go/abc` returns the landing page** | Routing missing (`router.php` not passed, or `.htaccess` ignored) | Built-in server: run `php -S ... router.php`. Apache: confirm `.htaccess` allowed |
+| **`/go/abc` → 404** | Rewrite not active or code typed wrong | Check admin → Links/Chains for the code; test with a fresh link |
+| **`SQLSTATE[HY000] … unable to open database file`** | `data/` not writable | `chmod` / `chown` the `data/` folder to the web user; create it manually with `755` if needed |
+| **Login fails even with the right password** | stale `admin_pass_hash` in config | Edit `config.php` → remove the `admin_pass_hash` line, or update via Settings |
+| **`php: command not found`** | PHP not installed | Install PHP 7.4+ (Debian/Ubuntu: `sudo apt install php php-sqlite3`) |
+| **`pdo_sqlite` extension missing** | PHP without SQLite driver | `sudo apt install php-sqlite3` or enable `pdo_sqlite` in `php.ini`; verify `php -m \| grep pdo_sqlite` |
+| **Session cookie not set over HTTPS** | `cookie_secure` is false | Set `cookie_secure => true` in `config.php` |
+| **Admin "Could not write config file"** | `config.php` not writable | `chmod 664 config.php` (or give write permission) then retry Settings |
+| **Clicks not increasing in Stats** | Browser cached the redirect / ad-block blocked the request | Try incognito; check `data/ns-link.sqlite` grows |
+
+---
+
+## 🔐 Security (production baseline)
+
+| Area | What NS Link does | What you should do |
+|---|---|---|
+| **Password** | Default `admin` / `ns-admin-2026`; Settings writes a bcrypt hash to `config.php` | **Change it on first login.** Keep `config.php` out of web root where possible |
+| **SQL** | All queries use **PDO prepared statements** (`EMULATE_PREPARES` off) | Keep PHP/SQLite versions patched |
+| **Output** | Everything escaped with `htmlspecialchars()` | Keep the admin panel under a private path / basic-auth if you like |
+| **Sessions** | HTTP-only, configurable name, `SameSite=Lax` | Deploy behind HTTPS; set `cookie_secure = true` |
+| **Hosts** | `allowed_hosts` array in config | Whitelist your real domain to blunt host-header attacks |
+| **Clicks data** | Logs `ip`, `user_agent`, `referer` | These are personal data — add retention cleanup if you care (e.g. delete rows older than N days); mention it in your privacy policy |
+| **Tests** | `tests/` contains no secrets | Remove `tests/` from production or restrict access |
 
 ---
 
@@ -252,7 +510,8 @@ shortener/
 ├── db.php             # PDO SQLite bootstrap (WAL, schema auto-apply) + helpers
 ├── auth.php           # Session + login gate for admin
 ├── schema.sql         # SQLite schema (auto-run on first boot)
-├── data/              # SQLite DB lives here (data/ns-link.sqlite)
+├── LICENSE            # GPL-2.0-or-later (canonical GNU text)
+├── data/              # SQLite DB lives here (data/ns-link.sqlite) — runtime, gitignored
 ├── admin/
 │   ├── login.php      # Login form
 │   ├── logout.php     # End session
@@ -270,26 +529,68 @@ shortener/
 
 ---
 
-## 🔐 Security
+## 🆕 What's new & why it's better
 
-- **Change the default password** before going live — Settings or `config.php`.
-- **SQL**: all queries use **prepared statements** (PDO, emulated prepares off).
-- **Output**: everything is escaped with `htmlspecialchars()`.
-- **Password hash**: written back via `var_export` (never `addslashes`) so the `$2y$` bcrypt hash round-trips byte-for-byte.
-- **Sessions**: HTTP-only cookies (`session_name` configurable), `cookie_secure` for HTTPS, optional `allowed_hosts` to harden against host-header abuse.
-- **`clicks` stores raw IP/UA** — private data by nature. Delete old rows periodically if you care about retention.
+- **No framework, no composer** — a real shared-host drop-in. Works on PHP 7.4+ and 8.x.
+- **Single SQLite file** — backup = copy one file.
+- **Auto-booting schema** — zero migration commands.
+- **`var_export`-safe config writes** — password hashes round-trip exactly (`$2y$…` survives).
+- **Cascading chain delete** — deleting a chain removes its step links too, so no dead rows.
+- **`step` column used everywhere** — clean per-step click stats.
 
 ---
 
-## 🛠️ Deployment
+## 🧭 Next steps
 
-- **Apache** (InfinityFree / 000webhost / cPanel): upload `shortener/` to `htdocs/`, keep `.htaccess`.
-- **Nginx**: rewrite `/go/(?<code>[A-Za-z0-9]+)` → `go.php?code=$code`; map other PHP paths normally.
-- **Permissions**: `data/` (and the `data/ns-link.sqlite*` siblings) must be writable by PHP.
-- **Production hygiene**: remove or restrict `tests/`, keep `config.php` out of web-accessible paths if possible, always HTTPS.
+- **Part 1** (WordPress control layer): [`../ns-link-wp/README.md`](../ns-link-wp/README.md)
+- **Repo root**: [`../README.md`](../README.md)
 
 ---
 
 ## 📜 License
 
-**GPL-2.0-or-later** — same as the rest of the repo. See the main [LICENSE](../LICENSE).
+**NS Link — URL Shortener Web App** is licensed under the **GNU General Public License v2.0 or later
+(GPL-2.0-or-later)** — the same license as the rest of the NSKWeb/ns repository.
+
+| | |
+|---|---|
+| **License** | GNU GPL **v2.0 or later** (GPL-2.0-or-later) |
+| **File** | [`shortener/LICENSE`](LICENSE) — canonical GNU text, identical to repo root [`LICENSE`](../LICENSE) |
+| **Copyright** | © 2026 NSKWeb |
+| **Source** | [github.com/NSKWeb/ns](https://github.com/NSKWeb/ns) |
+
+### What you may do
+
+- ✅ Use, run, copy, modify, and **redistribute** the software freely — **even commercially**.
+- ✅ Sell it or offer it as a managed service.
+- ✅ Study and change the source — the whole app is plain PHP, no obfuscation.
+
+### What you must do
+
+| If you… | You must… |
+|---|---|
+| **Redistribute** (publish a copy, modified or not) | Provide the **source code** under the same **GPL** license, include a **copy of the license** + **copyright notice** |
+| **Modify and distribute** | Release your changes under **GPL-2.0-or-later**, keep attribution, document that you changed files |
+| **Run it as a service** (hosted SaaS) | Running it for users is your right — GPL's source obligations trigger on **distribution**, not on running it yourself |
+| **Combine with other software** | The combined work must be GPL-compatible (see compatibility note) |
+
+### The short version (plain English)
+
+> NS Link is **free software**: you get it for free and can do almost anything with it, but if you
+> hand it to someone else — even in modified form — you have to hand them the **source** too, under
+> the same license, with the license text and copyright notice intact. There is **no warranty**:
+> it comes "AS IS".
+
+### Attribution (recommended, not required)
+
+A little line in your README or site footer keeps the project discoverable:
+
+```
+NS Link — URL shortener + chain generator (GPL-2.0-or-later) — https://github.com/NSKWeb/ns
+```
+
+### GPL compatibility
+
+GPL-**v2-or-later** code can be combined with other GPL-v2-or-later and GPL-v3 projects, per the
+"or later" clause. It is **not** compatible with proprietary/closed-source licenses — a modified /
+derivative version must stay GPL.

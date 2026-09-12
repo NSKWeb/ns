@@ -62,7 +62,7 @@ $links = $db->query('SELECT * FROM links ORDER BY id DESC')->fetchAll();
             <form method="post" action="/admin/links.php" onsubmit="return confirm('Delete this link?');">
               <input type="hidden" name="action" value="delete">
               <input type="hidden" name="id" value="<?= (int)$l['id'] ?>">
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           </td>
         </tr>

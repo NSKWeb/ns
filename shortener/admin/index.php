@@ -168,7 +168,7 @@ $chains = $db->query('SELECT * FROM chains ORDER BY id DESC LIMIT 25')->fetchAll
             <form method="post" action="/admin/index.php" onsubmit="return confirm('Delete this link?');">
               <input type="hidden" name="action" value="delete_link">
               <input type="hidden" name="id" value="<?= (int)$l['id'] ?>">
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           </td>
         </tr>
@@ -197,7 +197,7 @@ $chains = $db->query('SELECT * FROM chains ORDER BY id DESC LIMIT 25')->fetchAll
             <form method="post" action="/admin/index.php" onsubmit="return confirm('Delete this chain?');">
               <input type="hidden" name="action" value="delete_chain">
               <input type="hidden" name="id" value="<?= (int)$c['id'] ?>">
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           </td>
         </tr>
@@ -208,7 +208,7 @@ $chains = $db->query('SELECT * FROM chains ORDER BY id DESC LIMIT 25')->fetchAll
   </section>
 </main>
 <script>
-document.getElementById('addStepBtn').addEventListener('click' function () {
+document.getElementById('addStepBtn').addEventListener('click', function () {
   var form = document.getElementById('chainForm');
   var n = parseInt(document.getElementById('stepCount').value, 10) + 1;
   document.getElementById('stepCount').value = n;

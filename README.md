@@ -188,7 +188,7 @@ Free hosting( Netlify Drop / Vercel / GitHub Pages): repo ka root folder drag-dr
 
 ### Step 6 - Part 2 (URL shortener web app) deploy
 
-**Part 2 ab isi repo me `shortener/` folder me hai** — ek self-contained **PHP + SQLite URL shortener + chain generator**. Full docs: [`shortener/README.md`](shortener/README.md).
+**Part 2 ab isi repo me `shortener/` folder me hai** — ek self-contained **PHP + SQLite URL shortener + chain generator**. Full docs + **step-by-step deploy/host/operate guide**: [`shortener/README.md`](shortener/README.md). License: **GPL-2.0-or-later** (`shortener/LICENSE`).
 
 #### 🧪 Live demo (container preview)
 
