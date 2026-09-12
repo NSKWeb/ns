@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# /go/<code> -> go.php
+RewriteRule ^go/([A-Za-z0-9]+)/?$ go.php?code=$1 [L,QSA]
+
+# Static assets are served directly when the file exists.
+# task.php, index.php and admin/*.php resolve naturally.

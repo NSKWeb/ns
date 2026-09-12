@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="t1 t2">
+  <title id="t1">NS Link shortener — chain engine flow</title>
+  <desc id="t2">Short link is resolved by go.php, renders timed task pages with ad slots, logs every click to SQLite, then opens the destination URL.</desc>
+  <defs>
+    <style>
+      .ink  { fill: #1C1A17; }
+      .verm { fill: #E4572E; }
+      .ochre{ fill: #C98A00; }
+      .paper{ fill: #F7F1E5; }
+      .card { fill: #FFFBF2; }
+      .mono { font-family: 'Courier New', monospace; }
+      .serif{ font-family: Georgia, serif; }
+      .soft { fill: rgba(28,26,23,.62); }
+      .phead{ font-family: 'Courier New', monospace; fill:#F7F1E5; font-size:15px; letter-spacing:1px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="640" fill="#F7F1E5"/>
+  <text x="50" y="52" class="serif ink" font-size="36" font-weight="900">The Chain Engine &mdash; shortener/</text>
+  <text x="50" y="84" class="mono soft" font-size="18" letter-spacing="4">SHORT LINK &rarr; TASK 1 &rarr; TASK 2 &rarr; &hellip; &rarr; DESTINATION</text>
+  <text x="50" y="108" class="mono ochre" font-size="15" letter-spacing="2">EVERY STEP: 302 OR TIMED TASK PAGE &middot; EVERY VIEW LOGGED TO CLICKS</text>
+
+  <!-- Box 1: SHORT LINK -->
+  <g transform="translate(50,140)">
+    <rect width="160" height="210" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="160" height="36" fill="#1C1A17"/>
+    <text x="80" y="30" text-anchor="middle" class="phead">SHORT LINK</text>
+    <text x="80" y="72" text-anchor="middle" class="mono ink" font-size="21">geB2vA</text>
+    <text x="80" y="96" text-anchor="middle" class="mono soft" font-size="12">one code &rarr; one chain</text>
+    <circle cx="80" cy="138" r="16" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="80" y="145" text-anchor="middle" class="mono verm" font-size="16">&rarr;</text>
+    <text x="80" y="188" text-anchor="middle" class="mono soft" font-size="11">302 or render 2xx</text>
+  </g>
+  <path d="M212 228 h38 l-8 -6 m8 6 l-8 6" stroke="#E4572E" stroke-width="4" fill="none"/>
+  <text x="214" y="212" class="mono verm" font-size="12">code</text>
+
+  <!-- Box 2: ROUTER go.php -->
+  <g transform="translate(260,140)">
+    <rect width="160" height="210" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="160" height="36" fill="#1C1A17"/>
+    <text x="80" y="30" text-anchor="middle" class="phead">go.php</text>
+    <text x="80" y="72" text-anchor="middle" class="mono ink" font-size="14">links?</text>
+    <text x="80" y="96" text-anchor="middle" class="mono ink" font-size="14">chains?</text>
+    <text x="80" y="120" text-anchor="middle" class="mono ink" font-size="14">step link?</text>
+    <rect x="24" y="136" width="112" height="22" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="80" y="152" text-anchor="middle" class="mono ochre" font-size="12">route + log</text>
+    <text x="80" y="196" text-anchor="middle" class="mono soft" font-size="11">click recorded</text>
+  </g>
+  <path d="M422 228 h38 l-8 -6 m8 6 l-8 6" stroke="#E4572E" stroke-width="4" fill="none"/>
+
+  <!-- Box 3: TASK 1 -->
+  <g transform="translate(470,140)">
+    <rect width="160" height="210" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="160" height="36" fill="#1C1A17"/>
+    <text x="80" y="30" text-anchor="middle" class="phead">TASK 1</text>
+    <circle cx="80" cy="72" r="22" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="80" y="79" text-anchor="middle" class="mono ink" font-size="17">8s</text>
+    <rect x="24" y="106" width="112" height="20" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="80" y="120" text-anchor="middle" class="mono ochre" font-size="11">ad 728&times;90</text>
+    <rect x="24" y="136" width="112" height="20" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="80" y="150" text-anchor="middle" class="mono ochre" font-size="11">ad 300&times;250</text>
+    <text x="80" y="192" text-anchor="middle" class="mono soft" font-size="11">Continue &rarr;</text>
+  </g>
+  <path d="M632 228 h38 l-8 -6 m8 6 l-8 6" stroke="#E4572E" stroke-width="4" fill="none"/>
+  <text x="628" y="216" class="mono soft" font-size="12">wait &rarr; unlock</text>
+
+  <!-- Box 4: TASK 2 -->
+  <g transform="translate(680,140)">
+    <rect width="160" height="210" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="160" height="36" fill="#1C1A17"/>
+    <text x="80" y="30" text-anchor="middle" class="phead">TASK 2</text>
+    <circle cx="80" cy="72" r="22" fill="none" stroke="#E4572E" stroke-width="3"/>
+    <text x="80" y="79" text-anchor="middle" class="mono ink" font-size="17">6s</text>
+    <rect x="24" y="106" width="112" height="20" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="80" y="120" text-anchor="middle" class="mono ochre" font-size="11">ad slots</text>
+    <text x="80" y="192" text-anchor="middle" class="mono soft" font-size="11">Continue &rarr;</text>
+  </g>
+  <path d="M842 228 h38 l-8 -6 m8 6 l-8 6" stroke="#E4572E" stroke-width="4" fill="none"/>
+  <text x="830" y="216" class="mono soft" font-size="12">&hellip;final step</text>
+
+  <!-- Box 5: DESTINATION -->
+  <g transform="translate(890,140)">
+    <rect width="160" height="210" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="160" height="36" fill="#1C1A17"/>
+    <text x="80" y="30" text-anchor="middle" class="phead">DESTINATION</text>
+    <text x="80" y="74" text-anchor="middle" class="mono ink" font-size="15">offer page</text>
+    <text x="80" y="98" text-anchor="middle" class="mono soft" font-size="12">opens on final step</text>
+    <rect x="24" y="130" width="112" height="34" fill="none" stroke="#C98A00" stroke-dasharray="5 4" stroke-width="2"/>
+    <text x="80" y="152" text-anchor="middle" class="mono ochre" font-size="12">Open Your Link &rarr;</text>
+    <text x="80" y="192" text-anchor="middle" class="mono soft" font-size="11">new tab</text>
+  </g>
+
+  <text x="600" y="382" text-anchor="middle" class="mono soft" font-size="13" letter-spacing="2">EVERY /GO/ REQUEST &rarr; go.php &rarr; RENDER &rarr; `clicks` (&amp; `settings`)</text>
+
+  <!-- Panel A: ADMIN -->
+  <g transform="translate(50,402)">
+    <rect width="520" height="196" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="520" height="36" fill="#1C1A17"/>
+    <text x="260" y="30" text-anchor="middle" class="phead">ADMIN PANEL &mdash; /admin/</text>
+    <text x="30" y="80" class="serif ink" font-size="18">&#10003; create simple link &rarr; /go/&lt;code&gt;</text>
+    <text x="30" y="110" class="serif ink" font-size="18">&#10003; build chain: N steps + wait + destination</text>
+    <text x="30" y="140" class="serif ink" font-size="18">&#10003; manage chains &amp; links (preview / delete)</text>
+    <text x="30" y="170" class="serif ink" font-size="18">&#10003; click stats &amp; change password</text>
+  </g>
+
+  <!-- Panel B: SQLITE -->
+  <g transform="translate(620,402)">
+    <rect width="520" height="196" rx="4" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/>
+    <rect x="0" y="6" width="520" height="36" fill="#1C1A17"/>
+    <text x="260" y="30" text-anchor="middle" class="phead">DATA/NS-LINK.SQLITE</text>
+    <rect x="30" y="60" width="140" height="30" fill="none" stroke="#1C1A17" stroke-width="2"/>
+    <text x="100" y="81" text-anchor="middle" class="mono ink" font-size="13">links</text>
+    <text x="100" y="106" text-anchor="middle" class="mono soft" font-size="11">code &middot; url &middot; title</text>
+    <rect x="195" y="60" width="140" height="30" fill="none" stroke="#1C1A17" stroke-width="2"/>
+    <text x="265" y="81" text-anchor="middle" class="mono ink" font-size="13">chains</text>
+    <text x="265" y="106" text-anchor="middle" class="mono soft" font-size="11">code &middot; steps_json</text>
+    <rect x="355" y="60" width="140" height="30" fill="none" stroke="#1C1A17" stroke-width="2"/>
+    <text x="425" y="81" text-anchor="middle" class="mono ink" font-size="13">clicks</text>
+    <text x="425" y="106" text-anchor="middle" class="mono soft" font-size="11">step &middot; ip &middot; ua &middot; ref</text>
+    <rect x="30" y="130" width="140" height="30" fill="none" stroke="#C98A00" stroke-width="2"/>
+    <text x="100" y="151" text-anchor="middle" class="mono ochre" font-size="13">settings</text>
+    <text x="100" y="176" text-anchor="middle" class="mono soft" font-size="11">admin_user &middot; base_url</text>
+  </g>
+
+  <!-- logical wire: router -> sqlite -->
+  <path d="M340 350 v36" stroke="#C98A00" stroke-width="3" fill="none" stroke-dasharray="6 4"/>
+  <path d="M345 370 l-5 -8 m5 8 l5 -8" stroke="#C98A00" stroke-width="3" fill="none"/>
+
+  <text x="600" y="628" text-anchor="middle" class="mono soft" font-size="13" letter-spacing="2">PART 2 &middot; PHP 8 &middot; SQLITE &middot; NO FRAMEWORK &middot; SELF-HOSTED &middot; GPL-2.0</text>
+</svg>

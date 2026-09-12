@@ -1,0 +1,3 @@
+# Runtime data (SQLite DB + WAL/journal) — never commit local clicks/DB
+data/*.sqlite
+data/*.sqlite-*

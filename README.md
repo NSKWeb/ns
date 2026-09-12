@@ -4,6 +4,14 @@
 
 <p align="center"><b>WP Safelink ka <span style="color:#E4572E">FREE</span> alternative</b> - literary neo-brutalism / editorial design ke saath. <em>One link, four readings, ad-funded press run.</em></p>
 
+<p align="center">
+  <a href="https://github.com/NSKWeb/ns"><img src="https://img.shields.io/badge/GitHub-NSKWeb%2Fns-1C1A17?logo=github&style=for-the-badge&labelColor=F7F1E5" alt="GitHub - NSKWeb/ns"></a>
+  &nbsp;
+  <a href="shortener/README.md"><img src="https://img.shields.io/badge/Part2-URL%20shortener-E4572E?style=for-the-badge&labelColor=F7F1E5" alt="Part 2 - URL shortener"></a>
+  &nbsp;
+  <a href="https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/"><img src="https://img.shields.io/badge/Live%20demo-NS%20Link-C98A00?style=for-the-badge&labelColor=F7F1E5" alt="Live demo"></a>
+</p>
+
 <div align="center">
 
 | | |
@@ -26,7 +34,9 @@
 | Path | Kya hai |
 |---|---|
 | `ns-link-wp/` | **WordPress plugin (Part 1)** - control layer + settings |
-| `assets/brand/` | SVG brand assets - masthead, flow diagram, palette, badges |
+| `shortener/` | **🧷 URL shortener web app (Part 2)** — PHP + SQLite, chain generator + single admin panel (links / chains / stats / settings). Flow diagram: [`ns-link-shortener-flow.svg`](assets/brand/ns-link-shortener-flow.svg). Docs: [`shortener/README.md`](shortener/README.md) |
+| `assets/brand/` | SVG brand assets — masthead, Part-1 flow, **Part-2 shortener flow**, palette, badges |
+| `assets/screenshots/` | **Live-demo screenshots** (landing, task page, final step, admin dashboard, stats) |
 | `preview-ns-link.html` | Full editorial article page (design reference) |
 | `preview-ns-link-simple.html` | Sirf control layer preview (no article) |
 | `preview-ns-link-flow.html` | Side-by-side flow template (P1-3 vs P4) |
@@ -87,7 +97,7 @@ git clone https://github.com/NSKWeb/ns.git
 cd ns
 ```
 
-### Step Step  1 - WordPress par plugin install karo
+### Step 1 - WordPress par plugin install karo
 
 1. Andar ka folder `ns-link-wp` ko zip karo:
    ```bash
@@ -103,7 +113,7 @@ cd ns
 
 
 
-### Step Step  2 - Plugin settings set karo
+### Step 2 - Plugin settings set karo
 
 1. WP admin -> **Settings -> NS Link**.
 2. Defaults set karo:
@@ -119,7 +129,7 @@ cd ns
 
 
 
-### Step Step  3 - Apne 4 ad pages banao (WordPress:
+### Step 3 - Apne 4 ad pages banao (WordPress:
 
 
 
@@ -140,7 +150,7 @@ cd ns
 
 
 
-### Step Step  4 - Chain URL banao aur test karo
+### Step 4 - Chain URL banao aur test karo
 
 Chain URL ka pattern ((README ke upar wala example dekho):
 ```bash
@@ -163,7 +173,7 @@ https://site.com/task-4/?step=4&total=4&wait=10&done=1&dest=https%3A%2F%2Fdestin
 
 
 
-### Step Step  5 - Live dekho( preview files:
+### Step 5 - Live dekho( preview files:
 
 Preview/design files isi repo me hain - direct browser me kholo ya kisi free static hosting par daal do:
 ```bash
@@ -176,20 +186,65 @@ Free hosting( Netlify Drop / Vercel / GitHub Pages): repo ka root folder drag-dr
 
 
 
-### Step Step  6 - Part  2 (URL shortener web app) jab ayega,, deploy
+### Step 6 - Part 2 (URL shortener web app) deploy
 
-Alag-domain **URL shortener web app / website** (PHP) jab isi repo me aayega - deploy rasta (InfinityFree/000webhost:
+**Part 2 ab isi repo me `shortener/` folder me hai** — ek self-contained **PHP + SQLite URL shortener + chain generator**. Full docs: [`shortener/README.md`](shortener/README.md).
+
+#### 🧪 Live demo (container preview)
+
+> The demo runs on a temporary all-hands container URL — it may not always be up. Admin login: `admin` / `ns-admin-2026` *(change it soon)*. Fresh DB, reset-friendly.
+
+| What | Link |
+|---|---|
+| **App root** | [work-2 … all-hands.dev](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/) |
+| **Chain flow** | [chain `qTqvVFAZ`](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/go/qTqvVFAZ) — 4 timed task steps → "Open Your Link" |
+| **Direct link** | [direct `fPfMju`](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/go/fPfMju) — 302 to example.com |
+| **Admin panel** | [login](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/admin/login.php) |
+
+<details>
+<summary>📸 Screenshots (live app)</summary>
+
+| Landing | Task page | Final step | Dashboard | Stats |
+|---|---|---|---|---|
+| <img src="assets/screenshots/demo-landing.png" alt="Landing" width="400"> | <img src="assets/screenshots/demo-task-page.png" alt="Task page" width="400"> | <img src="assets/screenshots/demo-final-step.png" alt="Final step" width="400"> | <img src="assets/screenshots/demo-dashboard.png" alt="Dashboard" width="400"> | <img src="assets/screenshots/demo-stats.png" alt="Stats" width="400"> |
+
+</details>
+
+<p align="center">
+  <img src="assets/brand/ns-link-shortener-flow.svg" alt="NS Link shortener - chain engine flow" width="880">
+</p>
+
+**Kya karta hai (ek line me):** `site.com/go/abc123` → visitor task pages par rukta hai (ad slots) → timer khatam → **Continue** → final step par **Open Your Link** → destination. Har step ka click logged hota hai.
+
+**Logic — `/go/<code>` ka flow:**
+
+| Step | Kya hota hai |
+|---|---|
+| 1. Plain link? | `links` table me direct URL mila → click logged → **302 redirect** to target |
+| 2. Chain-step link? | URL me `chain=<c>&step=<n>` hai → click logged → **task page render** (timed) |
+| 3. Chain code? | `chains` table me chain mila → click logged → **302 redirect** to pehle step ka short link |
+| 4. Kuch nahi | **404 Not Found** |
+
+**Deploy rasta** (InfinityFree / 000webhost / koi bhi PHP host):
 ```bash
-1.. shortener web app folder ko hosting ke `htdocs/` me upload karo
-2.. Domain point karo( short.site)) -> `site.com/go/<short-code>` se flow chain chalega.
-
-3.. Admin panel `your-host/admin.php` se 4 URLs + timer + destination set karo
+1. `shortener/` folder ko hosting ke `htdocs/` me upload karo
+2. Domain point karo -> `site.com/go/<short-code>` se chain flow chalega
+3. Admin panel `site.com/admin/` se links + chains + timer + destination set karo
+4. Login hone ke baad turant default password badal do (Settings me)
 ```
-Detail tab ayega( Part 2 commit ke saath.
+
+**Local test ke liye** PHP built-in server (bina install):
+```bash
+cd shortener
+php -S 127.0.0.1:8099 router.php
+# -> http://127.0.0.1:8099/   (admin: /admin/login.php)
+```
+
+> **Smart table** — `links` (redirects), `chains` (steps JSON), `clicks` (per-step hits). SQLite single file, auto-schema, prepared statements. 22/22 smoke tests pass.
 
 
 
-### Step Step  7 - GitHub par changes push karna( baad me:
+### Step 7 - GitHub par changes push karna( baad me:
 
 
 
@@ -208,8 +263,8 @@ git push origin main
 
 ## Next steps
 
-- **Part  2** - alag-domain **URL shortener web app / website** (chain generator + admin panel) - **isi repo me** folder `shortener/` me aayega..
-- **Part  3** - GitHub Actions se free hosting deploy optional..
+- **Part 2** ✅ - **URL shortener web app / website** (chain generator + admin panel) — ab isi repo me `shortener/` folder me ready hai. Docs: [`shortener/README.md`](shortener/README.md)
+- **Part 3** ⏳ - GitHub Actions se free hosting deploy (optional)
 
 ---
 
@@ -224,7 +279,7 @@ git push origin main
 | **Kya kar sakte ho** | ✓ Free me use, copy, modify, distribute, sell karo ✓ |
 | **Kya nahi kar sakte** | ✗ Adhikar mat chhino (unka GPL hona zaroori) ✗ |
 | **Agar distribute karo** | Source code available rakhna hoga + GPL license + copyright notice retain karna hoga |
-| **Works — repo ke sab parts par** | Plugin (`ns-link-wp/`), web app folder (jab aayega), design assets (`assets/`), previews, docs — sab isi license ke under hain |
+| **Works — repo ke sab parts par** | Plugin (`ns-link-wp/`), web app (`shortener/`), design assets (`assets/`), previews, docs — sab isi license ke under hain |
 | **No warranty** | Ye software "AS IS" hai — koi warranty nahi, koi liability nahi (Section 11, 12) |
 | **Compatibility** | GPL-v2-or-later free software ke saath compatible. GPL-v3 projects ke saath bhi (compatibility clause se) |
 
@@ -241,10 +296,3 @@ Agar tum NS Link ko use karte ho ya distribute karte ho, to:
 |---|---|
 | Copyright | © 2026 NSKWeb |
 | License | [GPL-2.0-or-later](LICENSE) |
-
----
-
-## Next steps
-
-- **Part  2** - alag-domain **URL shortener web app / website** (chain generator + admin panel) - **isi repo me** folder `shortener/` me aayega..
-- **Part  3** - GitHub Actions se free hosting deploy optional..
