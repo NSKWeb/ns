@@ -11,7 +11,7 @@
   &nbsp;
   <a href="https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/"><img src="https://img.shields.io/badge/Live%20demo-NS%20Link-C98A00?style=for-the-badge&labelColor=F7F1E5" alt="Live demo"></a>
 </p>
-> 🌐 **Language / भाषा:** हिंग्लिश (Hinglish) — yeh page · [**English**](README.en.md)
+> 🌐 **Language:** Hinglish — yeh page · [**English**](README.en.md)
 
 <div align="center">
 
@@ -42,7 +42,7 @@
 | `preview-ns-link-simple.html` | Sirf control layer preview (no article) |
 | `preview-ns-link-flow.html` | Side-by-side flow template (P1-3 vs P4) |
 | `test-ns-link-layer.html` | **Live test harness** - timer chalta hai |
-| `README.md` | Yeh page - Hinglish (हिंग्लिश) quick start + deployment guide |
+| `README.md` | Yeh page - Hinglish quick start + deployment guide |
 | `README.en.md` | Full English version of the README |
 
 ---
@@ -190,7 +190,7 @@ Free hosting( Netlify Drop / Vercel / GitHub Pages): repo ka root folder drag-dr
 
 ### Step 6 - Part 2 (URL shortener web app) deploy
 
-**Part 2 ab isi repo me `shortener/` folder me hai** — ek self-contained **PHP + SQLite URL shortener + chain generator**. Full docs + **step-by-step deploy/host/operate guide**: [`shortener/README.md`](shortener/README.md) (English) / [`shortener/README.hi.md`](shortener/README.hi.md) (हिंग्लिश). License: **GPL-2.0-or-later** (`shortener/LICENSE`).
+**Part 2 ab isi repo me `shortener/` folder me hai** — ek self-contained **PHP + SQLite URL shortener + chain generator**. Full docs + **step-by-step deploy/host/operate guide**: [`shortener/README.md`](shortener/README.md) (English) / [`shortener/README.hi.md`](shortener/README.hi.md) (Hinglish). License: **GPL-2.0-or-later** (`shortener/LICENSE`).
 
 #### 🧪 Live demo (container preview)
 

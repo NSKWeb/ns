@@ -9,7 +9,7 @@
 
 **Part of the [NSKWeb/ns](../README.md) repo** (main README → Part 2). The visual voice is the same as the WordPress plugin: *literary neo-brutalism* — paper background, ink lines, vermilion + ochre accents, serif headlines with monospace labels.
 
-> 🌐 **Language / भाषा:** English (this page) · [**हिंग्लिश (Hinglish)**](README.hi.md)
+> 🌐 **Language:** English (this page) · [**Hinglish**](README.hi.md)
 
 ---
 

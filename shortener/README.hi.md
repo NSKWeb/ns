@@ -1,4 +1,4 @@
-# 🧷 NS Link — URL Shortener Web App (Part 2) — हिंग्लिश
+# 🧷 NS Link — URL Shortener Web App (Part 2) — Hinglish
 
 > **Ek short link, editorial chain of task pages, ek final destination.**
 > Self-hosted URL shortener + chain generator — **vanilla PHP + SQLite**, koi framework nahi, koi composer nahi. Folder kisi bhi PHP host par drop karo, chal jayega.
@@ -9,7 +9,7 @@
 
 **Yeh [NSKWeb/ns](../README.md) repo ka hissa hai** (main README → Part 2). Visual voice wahi hai jo WordPress plugin ka hai: *literary neo-brutalism* — paper background, ink lines, vermilion + ochre accents, serif headlines + monospace labels.
 
-> 🌐 **Language / भाषा:** हिंग्लिश (Hinglish) — yeh page · [**English**](README.md)
+> 🌐 **Language:** Hinglish — yeh page · [**English**](README.md)
 
 ---
 
