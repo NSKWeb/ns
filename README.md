@@ -196,13 +196,14 @@ Free hosting( Netlify Drop / Vercel / GitHub Pages): repo ka root folder drag-dr
 
 | What | Link |
 |---|---|
-| **App root** | [work-2 … all-hands.dev](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/) |
+| **App root (primary)** | [work-2 … all-hands.dev](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/) |
+| **App root (backup)** | [work-1 … all-hands.dev](https://work-1-axtomacioldgqets.prod-runtime.all-hands.dev/) |
 | **Chain flow** | [chain `qTqvVFAZ`](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/go/qTqvVFAZ) — 4 timed task steps → "Open Your Link" |
 | **Direct link** | [direct `fPfMju`](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/go/fPfMju) — 302 to example.com |
 | **Admin panel** | [login](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/admin/login.php) |
 
-<details>
-<summary>📸 Screenshots (live app)</summary>
+<details open>
+<summary>📸 Screenshots (live app) — open by default</summary>
 
 | Landing | Task page | Final step | Dashboard | Stats |
 |---|---|---|---|---|

@@ -16,6 +16,7 @@
 > ⚠️ **The demo runs on a temporary all-hands container URL** — it may not be up when you visit. While it runs it shows the real app against a real SQLite DB, and you can reset it anytime by deleting `shortener/data/`.
 
 **👉 Try it now:** [**work-2 … all-hands.dev**](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/)
+*(backup mirror: [**work-1 … all-hands.dev**](https://work-1-axtomacioldgqets.prod-runtime.all-hands.dev/))*
 
 - **Chain code** — [`/go/qTqvVFAZ`](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/go/qTqvVFAZ) → step-1 task page (timer) → Continue → … → final "Open Your Link"
 - **Direct link** — [`/go/fPfMju`](https://work-2-axtomacioldgqets.prod-runtime.all-hands.dev/go/fPfMju) → 302 to `https://example.com/direct`
@@ -23,8 +24,8 @@
 
 ### Screenshots
 
-<details>
-<summary>📸 Click to show live-demo screen recording stills</summary>
+<details open>
+<summary>📸 Live-demo screen recording stills (open by default)</summary>
 
 | Landing | Task page (step 1) |
 |---|---|
